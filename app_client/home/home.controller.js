@@ -2,7 +2,7 @@ angular
     .module('zispaApp')
     .controller('homeCtrl', homeCtrl);
 
-function homeCtrl (zispaData, geolocation) {
+function homeCtrl ($scope, zispaData, geolocation) {
     var vm = this;
 
     vm.pageHeader = {
