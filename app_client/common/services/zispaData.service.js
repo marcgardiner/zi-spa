@@ -1,6 +1,6 @@
 angular
     .module('zispaApp')
-    .service('zispaApp', zispaData);
+    .service('zispaData', zispaData);
 
 function zispaData ($http) {
     var locationByCoords = function (lat, lng) {
