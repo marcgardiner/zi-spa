@@ -26,7 +26,12 @@ var appClientFiles = [
   'app_client/common/filters/formatDistance.filter.js',
   'app_client/common/directives/ratingStars/ratingStars.directive.js'
 ];
-var uglified = uglifyJs.minify(appClientFiles, { compress: false });
+
+var fileContent = appClientFiles.map(function(file) {
+  return fs.readFileSync(file, 'utf-8');
+});
+
+var uglified = uglifyJs.minify(fileContent, { compress: false });
 
 fs.writeFile('public/angular/zispa.min.js', uglified.code, function (err) {
   if(err) {
