@@ -3,6 +3,7 @@
         .module('zispaApp')
         .controller('homeCtrl', homeCtrl);
 
+    homeCtrl.$inject = ['$scope', 'zispaData', 'geolocation'];
     function homeCtrl ($scope, zispaData, geolocation) {
         var vm = this;
 
