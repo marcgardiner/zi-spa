@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 require('./app_api/models/db');
+var uglifyJs = require("uglify-js");
+var fs = require('fs');
 
 var routes = require('./app_server/routes/index');
 var routesApi = require('./app_api/routes/index');
@@ -14,6 +16,30 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'jade');
+
+// uglify
+var appClientFiles = [
+  'app_client/app.js',
+  'app_client/home/home.controller.js',
+  'app_client/common/services/geolocation.service.js',
+  'app_client/common/services/zispaData.service.js',
+  'app_client/common/filters/formatDistance.filter.js',
+  'app_client/common/directives/ratingStars/ratingStars.directive.js'
+];
+
+var fileContent = appClientFiles.map(function(file) {
+  return fs.readFileSync(file, 'utf-8');
+});
+
+var uglified = uglifyJs.minify(fileContent, { compress: false });
+
+fs.writeFile('public/angular/zispa.min.js', uglified.code, function (err) {
+  if(err) {
+    console.log(err);
+  } else {
+    console.log('Script generated and saved: zispa.min.js');
+  }
+});
 
 app.use(logger('dev'));
 app.use(express.json());
