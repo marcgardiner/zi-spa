@@ -25,7 +25,8 @@ var appClientFiles = [
   'app_client/common/services/zispaData.service.js',
   'app_client/common/filters/formatDistance.filter.js',
   'app_client/common/directives/ratingStars/ratingStars.directive.js',
-  'app_client/common/directives/footerGeneric/footerGeneric.directive.js'
+  'app_client/common/directives/footerGeneric/footerGeneric.directive.js',
+  'app_client/common/directives/navigation/navigation.directive.js'
 ];
 
 var fileContent = appClientFiles.map(function(file) {
