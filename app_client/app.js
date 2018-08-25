@@ -1,5 +1,5 @@
 (function () {
-    angular.module('zispaApp', ['ngRoute']);
+    angular.module('zispaApp', ['ngRoute', 'ngSanitize']);
 
     function config($routeProvider, $locationProvider) {
         $routeProvider
