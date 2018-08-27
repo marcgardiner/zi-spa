@@ -3,11 +3,13 @@
         .module('zispaApp')
         .controller('locationDetailCtrl', locationDetailCtrl);
 
+    locationDetailCtrl.$inject = ['$routeParams'];
     function locationDetailCtrl () {
         var vm = this;
 
+        vm.locationid = $routeParams.locationid;
         vm.pageHeader = {
-            title: 'Location detail page'
+            title: vm.locationid
         };
     }
 })();
