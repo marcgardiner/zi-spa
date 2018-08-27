@@ -3,8 +3,8 @@
         .module('zispaApp')
         .controller('locationDetailCtrl', locationDetailCtrl);
 
-    locationDetailCtrl.$inject = ['$routeParams', 'zispaData'];
-    function locationDetailCtrl ($routeParams, zispaData) {
+    locationDetailCtrl.$inject = ['$routeParams', '$modal', 'zispaData'];
+    function locationDetailCtrl ($routeParams, $modal, zispaData) {
         var vm = this;
 
         vm.locationid = $routeParams.locationid;
