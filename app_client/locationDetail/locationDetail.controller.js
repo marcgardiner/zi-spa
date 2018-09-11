@@ -3,8 +3,8 @@
         .module('zispaApp')
         .controller('locationDetailCtrl', locationDetailCtrl);
 
-    locationDetailCtrl.$inject = ['$routeParams', 'zispaData'];
-    function locationDetailCtrl ($routeParams, zispaData) {
+    locationDetailCtrl.$inject = ['$routeParams', '$modal', 'zispaData'];
+    function locationDetailCtrl ($routeParams, $modal, zispaData) {
         var vm = this;
 
         vm.locationid = $routeParams.locationid;
@@ -22,5 +22,20 @@
             .error(function (e) {
                 console.log(e);
             });
+        
+            vm.popupReviewForm = function () {
+                var modalInstace = $modal.open({
+                    templateUrl: '/reviewModal/reviewModal.view.html',
+                    controller: 'reviewModalCtrl as vm',
+                    resolve: {
+                        locationData: function () {
+                            return {
+                                locationid: vm.locationid,
+                                locationName: vm.data.location.name
+                            };
+                        }
+                    }
+                });
+            };
     }
 })();
