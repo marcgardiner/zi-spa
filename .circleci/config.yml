@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker: # use the docker executor type; machine and macos executors are also supported
+      - image: circleci/node:8.10 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run:
+          name: Show current branch
+          command: echo ${CIRCLE_BRANCH}
+      - run:
+          name: Install local dependencies
+          command: npm install
+      - run:
+         name: Linting
+         command: npm run lint
