@@ -40,7 +40,7 @@ module.exports.locationsListByDistance = function(req, res) {
   if ((!lng && lng!==0) || (!lat && lat!==0) || ! maxDistance) {
     console.log('locationsListByDistance missing params');
     sendJSONresponse(res, 404, {
-      "message": "lng, lat and maxDistance query parameters are all required"
+      'message': 'lng, lat and maxDistance query parameters are all required'
     });
     return;
   }
@@ -82,7 +82,7 @@ module.exports.locationsReadOne = function(req, res) {
       .exec(function(err, location) {
         if (!location) {
           sendJSONresponse(res, 404, {
-            "message": "locationid not found"
+            'message': 'locationid not found'
           });
           return;
         } else if (err) {
@@ -96,7 +96,7 @@ module.exports.locationsReadOne = function(req, res) {
   } else {
     console.log('No locationid specified');
     sendJSONresponse(res, 404, {
-      "message": "No locationid in request"
+      'message': 'No locationid in request'
     });
   }
 };
@@ -136,7 +136,7 @@ module.exports.locationsCreate = function(req, res) {
 module.exports.locationsUpdateOne = function(req, res) {
   if (!req.params.locationid) {
     sendJSONresponse(res, 404, {
-      "message": "Not found, locationid is required"
+      'message': 'Not found, locationid is required'
     });
     return;
   }
@@ -147,7 +147,7 @@ module.exports.locationsUpdateOne = function(req, res) {
       function(err, location) {
         if (!location) {
           sendJSONresponse(res, 404, {
-            "message": "locationid not found"
+            'message': 'locationid not found'
           });
           return;
         } else if (err) {
@@ -193,13 +193,13 @@ module.exports.locationsDeleteOne = function(req, res) {
             sendJSONresponse(res, 404, err);
             return;
           }
-          console.log("Location id " + locationid + " deleted");
+          console.log('Location id ' + locationid + ' deleted');
           sendJSONresponse(res, 204, null);
         }
     );
   } else {
     sendJSONresponse(res, 404, {
-      "message": "No locationid"
+      'message': 'No locationid'
     });
   }
 };
