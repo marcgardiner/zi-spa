@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "lint": "eslint . --ignore-path .gitignore",
-    "lint-fix": "eslint . --ignore-path .gitignore --fix"
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
   },
   "engines": {
     "node": "~8.10.0",
