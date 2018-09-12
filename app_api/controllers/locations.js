@@ -29,7 +29,7 @@ module.exports.locationsListByDistance = function(req, res) {
   var lat = parseFloat(req.query.lat);
   var maxDistance = parseFloat(req.query.maxDistance);
   var point = {
-    type: "Point",
+    type: 'Point',
     coordinates: [lng, lat]
   };
   var geoOptions = {
