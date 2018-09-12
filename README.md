@@ -1,5 +1,7 @@
 # zi-spa
 
+[![CircleCI](https://circleci.com/gh/marcgardiner/zi-spa.svg?style=svg)](https://circleci.com/gh/marcgardiner/zi-spa)
+
 zi location application based on SPA, Node, Mongo, and Angular.
 
 ## Prerequisite
