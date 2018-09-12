@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dbUri = process.env.MONGODB_URI || 'mongodb://localhost/zispa';
 
-mongoose.connect('Connect to MongoDB:', dbUri);
+mongoose.connect(dbUri);
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', () => {
