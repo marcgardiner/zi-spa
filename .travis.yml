@@ -1,17 +1,23 @@
 language: node_js
 node_js:
-  - "8"
+    - "8"
 cache:
-  npm: true
-  directories:
-    - node_modules
+    npm: true
+    directories:
+        - node_modules
 install:
-  - npm install
+    - npm install
 script:
-  - echo "Validating changes ..."
-  - npm run lint
+    - echo "Validating changes ..."
+    - npm run lint
 # after_success:
 #   - test $TRAVIS_EVENT_TYPE = "push" && test $TRAVIS_BRANCH = "master" &&
 #     echo "Deploy to firebase ..." &&
 #     yarn run build:prod &&
 #     heroku firebase deploy --token $FIREBASE_TOKEN
+deploy:
+    provider: heroku
+    api_key: $API_KEY
+    skip_cleanup: true
+    on: feature/setup-TravisCI
+    run: "npm start"
