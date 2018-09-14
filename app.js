@@ -91,4 +91,11 @@ app.use((err, req, res, next) => {
     });
 });
 
+app.use((err, req, res, next) => {
+    if (err.name === 'unauthorizedError') {
+        res.status(401);
+        res.join({ 'message': `${err.name}: ${err.message}` });
+    }
+});
+
 module.exports = app;
