@@ -5,11 +5,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 require('./app_api/models/db');
+require('./app_api/config/passport');
 const uglifyJs = require('uglify-js');
 const fs = require('fs');
-const passport = require('passport');
-require('./app_api/config/passport');
 
 const routesApi = require('./app_api/routes/index');
 
