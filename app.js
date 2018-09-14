@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 require('./app_api/models/db');
 const uglifyJs = require('uglify-js');
 const fs = require('fs');
+const passport = require('passport');
+require('./app_api/config/passport');
 
 const routesApi = require('./app_api/routes/index');
 
@@ -56,6 +58,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_client')));
+app.use(passport.initialize());
 
 app.use('/api', routesApi);
 
