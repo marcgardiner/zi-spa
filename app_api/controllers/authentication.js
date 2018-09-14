@@ -47,7 +47,7 @@ module.exports.login = (req, res) => {
             return;
         }
         if (user) {
-            token = user.generateJwt();
+            token = user.generateJWT();
             sendJSONresponse(res, 200, {
                 'token': token
             });
