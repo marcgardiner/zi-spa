@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Loc = mongoose.model('Location');
+const User = mongoose.model('User');
 
 const sendJSONresponse = function(res, status, content) {
     res.status(status);
@@ -9,33 +10,35 @@ const sendJSONresponse = function(res, status, content) {
 /* POST a new review, providing a locationid */
 /* /api/locations/:locationid/reviews */
 module.exports.reviewsCreate = function(req, res) {
-    if (req.params.locationid) {
-        Loc
-            .findById(req.params.locationid)
-            .select('reviews')
-            .exec((err, location) => {
-                if (err) {
-                    sendJSONresponse(res, 400, err);
-                }
-                else {
-                    doAddReview(req, res, location);
-                }
+    getAuthor(req, res, (req, res, userName) => {
+        if (req.params.locationid) {
+            Loc
+                .findById(req.params.locationid)
+                .select('reviews')
+                .exec((err, location) => {
+                    if (err) {
+                        sendJSONresponse(res, 400, err);
+                    }
+                    else {
+                        doAddReview(req, res, location, userName);
+                    }
+                });
+        }
+        else {
+            sendJSONresponse(res, 404, {
+                'message': 'Not found, locationid required'
             });
-    }
-    else {
-        sendJSONresponse(res, 404, {
-            'message': 'Not found, locationid required'
-        });
-    }
+        }
+    });
 };
 
-const doAddReview = function(req, res, location) {
+const doAddReview = function(req, res, location, author) {
     if (!location) {
         sendJSONresponse(res, 404, 'locationid not found');
     }
     else {
         location.reviews.push({
-            author: req.body.author,
+            author: author,
             rating: req.body.rating,
             reviewText: req.body.reviewText
         });
@@ -236,4 +239,30 @@ module.exports.reviewsDeleteOne = function(req, res) {
                 });
             }
         });
+};
+
+const getAuthor = (req, res, callback) => {
+    if (req.payload && req.payload.email) {
+        User
+            .findOne({ email: req.payload.email })
+            .exec((err, user) => {
+                if (!user) {
+                    sendJSONresponse(res, 404, {
+                        'message': 'User not found'
+                    });
+                    return;
+                }
+                else if (err) {
+                    console.log(err);
+                    sendJSONresponse(res, 404, err);
+                    return;
+                }
+                callback(req, res, user.name);
+            });
+    }
+    else {
+        sendJSONresponse(res, 404, {
+            'message': 'User not found'
+        });
+    }
 };
