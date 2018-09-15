@@ -21,7 +21,7 @@
                 return false;
             } else {
                 vm.doAddReview(vm.locationData.locationid, vm.formData);
-            }        
+            }
         };
 
         vm.doAddReview = function (locationid, formData) {
